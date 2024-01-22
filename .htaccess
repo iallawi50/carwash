@@ -1,0 +1,9 @@
+<IfModule mod_rewrite.c>
+
+   RewriteEngine On
+
+   RewriteCond %{REQUEST_FILENAME}  -f [OR]
+   RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule !\.(?:jpe?g|gif|bmp|png|tiff|css|js)$ web.php [L,NC]
+
+</IfModule>

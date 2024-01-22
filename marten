@@ -1,0 +1,213 @@
+<?php
+
+define("CMD", "marten");
+define("FRAMEWORK", "Marten Framework");
+define("ARG", $_SERVER["argv"]);
+
+if (php_sapi_name() == "cli") {
+
+    // echo count(ARG) == 1;
+
+
+    if (isset(ARG[1])) {
+
+        if (strtolower(ARG[1]) == "make:model") {
+
+
+            if (isset(ARG[2])) {
+
+
+                $filename = ARG[2];
+
+                makeModel($filename);
+
+
+                if (isset(ARG[3])) {
+                    if (strtolower(ARG[3]) == "-c") {
+                        makeController(ARG[2]);
+                    } else {
+                        echo colors(3, "Write '-c' to create a Controller for this class");
+                        return false;
+                    }
+                }
+            } else {
+                echo colors("3", " # Please Enter Class Name : ");
+                echo "\e[38;5;2m";
+                $filename = trim(fgets(STDIN));
+                echo "\e[0m";
+                makeModel($filename);
+            }
+        } elseif (strtolower(ARG[1]) == "make:controller") {
+            makeController();
+        } else {
+
+            getCommands();
+        }
+    } else {
+        getCommands();
+    }
+}
+
+
+
+
+function colors($color, $text)
+{
+    /*
+
+0	أسود
+1	أحمر
+2	أخضر
+3	أصفر
+4	أزرق
+5	ماجنتا
+6	أزرق سماوي
+7	أبيض
+8	رمادي فاتح
+9	رمادي داكن
+10	أحمر فاتح
+11	أخضر فاتح
+12	أصفر فاتح
+13	أزرق فاتح
+14	ماجنتا فاتح
+15	أزرق سماوي فاتح
+16	أسود غامق
+17	أحمر غامق
+18	أخضر غامق
+19	أصفر غامق
+20	أزرق غامق
+21	ماجنتا غامق
+22	أزرق سماوي غامق
+23	أبيض ساطع
+
+
+*/
+    return "\e[38;5;$color" . "m" . $text . "\e[0m";
+}
+
+function commands()
+{
+    return [
+        "make:model" => "     To Create New Model\n",
+        "make:controller" => "To Create New Controller",
+        "\n" => "\n \n## if you want to make controller with this class write " . colors(9, "-c") . " after class name" .
+            "\n## " . colors(8, "php " . CMD . " make:model Name -c"),
+    ];
+}
+
+function  getCommands()
+{
+    echo "\n\n " . str_repeat("#", 30) . colors("6", " " . FRAMEWORK . " ") . str_repeat("#", 30) . "\n\n";
+    foreach (commands() as $key => $value) {
+        echo "#  " . colors("2", $key) . "            " . $value;
+    }
+    echo "\n\n " . str_repeat("#", 30) . colors("6", " " . FRAMEWORK . " ") . str_repeat("#", 30) . "\n\n";
+}
+
+function autoload()
+{
+    $command = "composer dump-autoload";
+    shell_exec($command);
+}
+
+
+function makeModel($filename)
+{
+    $filepath = "App" . DIRECTORY_SEPARATOR . "Models" . DIRECTORY_SEPARATOR . $filename . ".php";
+
+
+    $fileContent = <<< filename
+    <?php
+
+    
+    namespace App\Models;
+
+    use Model;
+
+    class $filename extends Model {
+
+
+
+    } 
+    filename;
+
+    if (!file_exists($filepath)) {
+        file_put_contents($filepath, $fileContent);
+        autoload();
+        echo colors("2", "\n # Class has been created successfully\n");
+    } else {
+        echo colors("1", "\n # Class name has already been used\n");
+    }
+}
+
+function makeController($class = null)
+{
+
+
+
+    if (isset(ARG[2])) {
+        if ($class) {
+
+            $filename = $class . "Controller";
+            $fileContent = <<< filename
+                <?php
+
+                namespace App\Controllers;
+                
+                use App\Models\\$class;
+                
+                class $filename
+                {
+
+                }
+
+                filename;
+            makeController2($filename);
+        } else {
+            $filename = ARG[2];
+            makeController2($filename);
+        }
+    } else {
+        echo colors("3", " # Please Enter Controller Name : ");
+        echo "\e[38;5;2m";
+        $filename = trim(fgets(STDIN));
+        echo "\e[0m";
+        makeController2($filename);
+    }
+}
+
+
+function makeController2($filename)
+{
+    if (!str_contains($filename, "Controller")) {
+        $filename .= "Controller";
+    }
+
+
+
+    $fileContent = <<< filename
+                <?php
+
+                namespace App\Controllers;
+
+                
+                class $filename
+                {
+
+
+                    
+                }
+
+                filename;
+
+
+    $filepath = "App" . DIRECTORY_SEPARATOR . "Controllers" . DIRECTORY_SEPARATOR . $filename . ".php";
+
+    if (!file_exists($filepath)) {
+        file_put_contents($filepath, $fileContent);
+        autoload();
+        echo colors("2", "\n # Controller has been created successfully \n");
+    } else {
+        echo colors("1", "\n # Controller name has already been used\n");
+    }
+}

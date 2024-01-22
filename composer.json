@@ -1,0 +1,14 @@
+{
+  "require": {
+    "symfony/dotenv": "^6.3"
+  },
+  "autoload": {
+    "classmap": [
+      "App",
+      "App/*"
+    ],
+    "files": [
+      "App/helpers.php"
+    ]
+  }
+}

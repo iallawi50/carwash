@@ -7,15 +7,15 @@
         </div>
         <h1 class="text-center">حجز موعد</h1>
         <div class="mb-3">
-            <label for="name" class="form-label">التاريخ</label>
+            <label for="name" class="form-label">الباقة</label>
             <select class="form-control" name="service_id">
-            <?php foreach($services as $serv): ?>
+                <?php foreach ($services as $serv) : ?>
 
-                <option value="<?= $serv->id ?>"><?= $serv->price ?> ريال  | <?= $serv->title ?>  </option>
+                    <option value="<?= $serv->id ?>"><?= $serv->price ?> ريال | <?= $serv->title ?> </option>
 
                 <?php endforeach ?>
             </select>
-            
+
         </div>
         <div class="mb-3">
             <label for="name" class="form-label">التاريخ</label>

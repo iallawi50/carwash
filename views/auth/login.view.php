@@ -4,6 +4,9 @@
     <form method=post class="shadow col-md-8  mx-auto" action="./login">
 
         <div class="p-3">
+            <div class="text-center">
+                <img src="<?= asset("imgs/logo.png") ?>" width="150px" alt="">
+            </div>
             <h1 class="text-center">تسجيل دخول</h1>
 
             <div class="mb-3">

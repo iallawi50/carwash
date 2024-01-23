@@ -24,11 +24,11 @@ abstract class Model
         return QueryBuilder::select($table, class: $class);
     }
 
-    public static function find($id, $col = 'id', $operator = "=")
+    public static function find($id, $col = 'id', $operator = "=", $first = true)
     {
 
         $table = self::getTable();
-        $data = QueryBuilder::select($table, [$col, $operator, $id], true);
+        $data = QueryBuilder::select($table, [$col, $operator, $id], $first);
 
         if ($data) {
             $class = new static;

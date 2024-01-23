@@ -23,4 +23,3 @@ use App\QueryBuilder;
 
 QueryBuilder::make(DBConnection::make());
 ?>
-<img src="./logo.png" alt="" width="30">

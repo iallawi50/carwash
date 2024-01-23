@@ -22,6 +22,7 @@ class AuthController
         $username = trim(Request::get("username"));
         $password = Request::get("password");
         $confirmpassword = Request::get("confirmpassword");
+        $account_type = Request::get("account_type", 0);
         $send = true;
         $data = [
             "name" => $name,
@@ -65,7 +66,8 @@ class AuthController
             User::create([
                 "name" => $name,
                 "username" => $username,
-                "password" => sha1($password),
+                "password" => $password,
+                "account_type" => $account_type
             ]);
 
             $user = User::find($username, "username");
@@ -75,7 +77,9 @@ class AuthController
         }
 
 
-        return view("auth/register", $data);
+        return false;
+        echo " gg";
+        // return view("auth/register", $data);
     }
 
     public function login()
@@ -96,7 +100,7 @@ class AuthController
         ];
 
         if (!empty($username) && !empty($password)) {
-            $password = sha1($password);
+            
             if ($user) {
 
                 if ($user->username == $username && $user->password == $password) {

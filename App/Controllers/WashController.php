@@ -24,22 +24,18 @@ class WashController
         $description = Request::get("description");
         $location = Request::get("location");
         $data = ["errors"];
-        
-         if(empty($name))
-         {
+
+        if (empty($name)) {
             $data["errors"]["name"] = "لايمكنك ترك الاسم فارغاً.";
-         }
-         if(empty($description))
-         {
+        }
+        if (empty($description)) {
             $data["errors"]["description"] = "لايمكنك ترك الوصف فارغاً.";
         }
-         if(empty($location))
-         {
+        if (empty($location)) {
             $data["errors"]["location"] = "لايمكنك ترك الموقع فارغاً.";
         }
-         
-        if(empty($data["errors"])) 
-        {       
+
+        if (empty($data["errors"])) {
             Wash::create([
                 "name" => $name,
                 "description" => $description,
@@ -47,19 +43,23 @@ class WashController
                 "user_id" => user()->id,
             ]);
 
-            return redirect("dashboard");
-
-        } else {
-
+            return redirect("dashboard/services");
         }
         return view("dashboard/create", $data);
     }
 
 
-    public function services()
+    public function edit()
     {
-        
+        return view("dashboard/edit");
     }
-
-    
+    public function update()
+    {
+        Wash::update(user()->wash()->id, [
+            "name" => Request::get("name"),
+            "description" => Request::get("description"),
+            "location" => Request::get("location"),
+        ]);
+        return redirect("/dashboard");
+    }
 }

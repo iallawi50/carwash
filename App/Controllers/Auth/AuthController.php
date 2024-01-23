@@ -20,6 +20,7 @@ class AuthController
 
         $name = trim(Request::get("name"));
         $username = trim(Request::get("username"));
+        $phone = Request::get("phone");
         $password = Request::get("password");
         $confirmpassword = Request::get("confirmpassword");
         $account_type = Request::get("account_type", 0);
@@ -67,6 +68,7 @@ class AuthController
                 "name" => $name,
                 "username" => $username,
                 "password" => $password,
+                "phone" => $phone,
                 "account_type" => $account_type
             ]);
 

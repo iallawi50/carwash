@@ -25,18 +25,15 @@ class ServiceController
         $data = [];
 
 
-        if(empty($title))
-        {
+        if (empty($title)) {
             $data["errors"]["title"] = "لايمكنك ترك العنوان فارغاً";
         }
-        
-        if(empty($price))
-        {
+
+        if (empty($price)) {
             $data["errors"]["title"] = "لايمكنك ترك السعر فارغاً";
         }
 
-        if(empty($data["errors"]))
-        {
+        if (empty($data["errors"])) {
             Service::create([
                 "title" => $title,
                 "price" => $price,
@@ -45,5 +42,14 @@ class ServiceController
         }
 
         return redirect("dashboard/services");
+    }
+
+    public function delete()
+    {
+        if(user()->id != Wash::find(Service::find(Request::get("id"))->wash_id)->user_id) {
+            return redirect_home();
+        }
+        Service::delete(Request::get("id"));
+        return back();
     }
 }

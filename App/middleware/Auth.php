@@ -24,8 +24,6 @@ class Auth
 
     public static function check()
     {
-
-
         if (isset($_SESSION['user']) && !is_null($_SESSION['user'])) {
             return true;
         } else {

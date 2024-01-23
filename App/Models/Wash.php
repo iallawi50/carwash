@@ -19,5 +19,10 @@ class Wash extends Model {
         return $this->hasMany(Service::class, "wash_id");
     }
 
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class, "wash_id");
+    }
+
 
 } 

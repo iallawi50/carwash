@@ -47,7 +47,7 @@ if (isset($_SESSION["user"]) && !User::find($_SESSION["user"]->id)) {
 
             <?php else: ?>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="<?= home() ?>">حجوزاتي</a>
+              <a class="nav-link active" aria-current="page" href="<?= home() ?>/reservations">حجوزاتي</a>
             </li>
             <?php endif ?>
 

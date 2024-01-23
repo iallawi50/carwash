@@ -20,7 +20,7 @@
                 <td><?=$serv->price?></td>
                 <td>
                     <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
-                        <button type="button" class="btn btn-danger">حذف</button>
+                        <a href="services/delete?id=<?=$serv->id?>" class="btn btn-danger">حذف</a>
                     </div>
                 </td>
             </tr>

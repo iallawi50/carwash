@@ -10,19 +10,24 @@
             </div>
             <h1 class="text-center">فتح حساب جديد</h1>
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">اسمك</label>
-                <input type="text" name="name" value="<?= $name ?? "" ?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <label for="name" class="form-label">اسمك</label>
+                <input type="text" name="name" value="<?= $name ?? "" ?>" class="form-control" id="name" aria-describedby="emailHelp">
                 <p class="text-danger"><?= $errors["name"] ?? '' ?></p>
             </div>
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">اسم المستخدم</label>
-                <input type="text" name="username" value="<?= $username ?? "" ?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <label for="username" class="form-label">اسم المستخدم</label>
+                <input type="text" name="username" value="<?= $username ?? "" ?>" class="form-control" id="username" aria-describedby="emailHelp">
                 <p class="text-danger"><?= $errors["username"] ?? '' ?></p>
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">رقم الجوال</label>
+                <input type="text" name="phone" value="<?= $phone ?? "" ?>" class="form-control" id="phone" aria-describedby="emailHelp">
+                <p class="text-danger"><?= $errors["phone"] ?? '' ?></p>
             </div>
 
             <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">كلمة المرور</label>
-                <input type="password" name="password" value="<?php $password ?? "" ?>" class="form-control" id="exampleInputPassword1">
+                <label for="password" class="form-label">كلمة المرور</label>
+                <input type="password" name="password" value="<?php $password ?? "" ?>" class="form-control" id="password">
                 <p class="text-danger"><?= $errors["password"] ?? '' ?></p>
             </div>
             <div class="mb-3">
@@ -31,7 +36,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">نوع الحساب</label>
+                <label class="form-label">نوع الحساب</label>
                 <div> 
                     <input type="radio" name="account_type" id="client" value="0" checked><label for="client">&nbsp; انا عميل</label>
                     <br>
@@ -40,6 +45,6 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-success rounded-0 col-12">Submit</button>
+        <button type="submit" class="btn btn-success rounded-0 col-12">تسجيل</button>
     </form>
 </div>

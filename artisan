@@ -1,7 +1,7 @@
 <?php
 
-define("CMD", "marten");
-define("FRAMEWORK", "Marten Framework");
+define("CMD", "artisan");
+define("FRAMEWORK", "Framework by Ali Hussain");
 define("ARG", $_SERVER["argv"]);
 
 if (php_sapi_name() == "cli") {

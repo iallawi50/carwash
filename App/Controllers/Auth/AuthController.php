@@ -77,11 +77,13 @@ class AuthController
 
             return redirect_home();
         }
+        else 
+        {
+        return view("auth/register", $data);
+        }
 
 
-        return false;
-        echo " gg";
-        // return view("auth/register", $data);
+
     }
 
     public function login()
